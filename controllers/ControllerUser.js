@@ -41,8 +41,7 @@ module.exports.getUsers = async function(req, res, next) {
 	}
 }
 
-module.exports.getIdUsers = async function(req, res, 
-	next){
+module.exports.getIdUsers = async function(req, res, next){
 	try{
 		let { id } = req.params
 		let getConnection = await connexion();
