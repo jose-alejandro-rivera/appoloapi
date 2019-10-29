@@ -9,6 +9,9 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var apiRestRouter = require('./routes/api.rest')
 var bodyParser = require('body-parser')
+var dotenv = require('dotenv');
+//inicializar variables Globales
+dotenv.config();
 
 var app = express();
 

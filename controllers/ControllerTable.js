@@ -1,12 +1,12 @@
-const connect  = require('../connect.js')
+const connexion = require('../connect.js')
 
 module.exports.tableUsers = async function(req, res, next){
 	//es.header("Access-Control-Allow-Origin", "*");
 	try{
 		
-		let connection = await connect
-		let sqlHeaders = await getHeaders(connection)
-		let sqlBody    = await getBody(connection)
+		let getConnection = await connexion();
+		let sqlHeaders = await getHeaders(getConnection)
+		let sqlBody    = await getBody(getConnection)
 
 		res.status(200).json(
 			{
