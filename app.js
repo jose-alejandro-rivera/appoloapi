@@ -10,6 +10,9 @@ var usersRouter = require('./routes/users');
 var apiRestRouter = require('./routes/api.rest')
 var bodyParser = require('body-parser')
 var dotenv = require('dotenv');
+
+const swaggerUi = require('swagger-ui-express');
+//const swaggerDocument = require('./swagger.json');
 //inicializar variables Globales
 dotenv.config();
 
@@ -18,6 +21,24 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+var options = {
+  explorer: true,
+  swaggerOptions: {
+    urls: [
+      {
+        url: 'http://petstore.swagger.io/v2/swagger.json',
+        name: 'Spec1'
+      },
+      {
+        url: 'http://petstore.swagger.io/v2/swagger.json',
+        name: 'Spec2'
+      }
+    ]
+  }
+};
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(null, options));
 
 app.use(logger('dev'));
 app.use(express.json());

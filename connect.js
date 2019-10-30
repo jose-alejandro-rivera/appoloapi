@@ -12,6 +12,7 @@ module.exports = function getConnection(data)  {
 		  	useUTC: true
 	  	}
 		}).connect()
+		
     return connectDB.then(pool => {
    	 	//console.log('Connected to MSSQL', pool)
     	return pool
