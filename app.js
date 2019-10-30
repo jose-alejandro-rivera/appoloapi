@@ -7,7 +7,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var apiRestRouter = require('./routes/api.rest')
+var apiRestRouter = require('./routes/api.rest');
 var bodyParser = require('body-parser')
 var dotenv = require('dotenv');
 
@@ -57,7 +57,6 @@ app.use(cors({
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', apiRestRouter);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
