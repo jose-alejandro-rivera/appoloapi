@@ -5,8 +5,8 @@ var Usuario = 'soporte';
 module.exports.initFlujo = async function(req, res, next){
 	try{
 		let getConnection = await connexion.getConnection();
-		let sql = await getConnection.query`SELECT * FROM categoriaFlujo`
-		let sql2 = await getConnection.query`SELECT * FROM paso`
+		let sql = await getConnection.query`SELECT Id_CategoriaFlujo ,NomCategoriaFlujo,Activo,Fecha,Usuario FROM categoriaFlujo`
+		let sql2 = await getConnection.query`SELECT Id_Paso,NomPaso,Descripcion,Activo,CodCuestionario,CodProceso,Fecha,Usuario FROM paso`
 		var data = {
 			categorias: sql.recordset,
 			pasos: sql2.recordset
@@ -45,8 +45,6 @@ module.exports.crearFlujo = async function(req, res, next){
 					}
 				})
 				.catch(function(err) {
-				   // plan on handling all errors here
-				   // is it better to handle each error individually upstream?  
 				   console.log(err);
 		   
 			   });
@@ -56,27 +54,5 @@ module.exports.crearFlujo = async function(req, res, next){
 		}
 	}catch(error){
 		res.status(500).json({'status':500, error : error})
-	}
-}
-
-module.exports.crearEjemplo = async function(req, res, next){
-	try{
-		//console.log(req)
-		let { nombre, apellido, usuario, password } = req.body
-		//let users = "jonat12@hotmail.com"
-		let getConnection = await connexion();
-		let validateUser = await getConnection.query`SELECT * FROM usuarios WHERE usuario = ${usuario}`
-		if(validateUser.recordset.length > 0 ){
-			res.status(201).json({'status':201, 'msg' : "el correo ya se encuentra registrado"})
-		}else{
-			let insertUser = await conection.query`INSERT INTO usuarios (nombre, apellido, usuario, password) VALUES (${nombre}, ${apellido}, ${usuario}, ${password})`
-			if(insertUser.rowsAffected.length > 0 ){
-				res.status(201).json({'status':200, 'msg':'create'})
-			}else{
-				res.status(201).json({'status':201, 'msg':'error'})
-			}
-		}
-	}catch(error){
-		res.status(500).json({'status':500, error : error.originalError})
 	}
 }
