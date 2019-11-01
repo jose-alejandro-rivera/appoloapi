@@ -39,7 +39,7 @@ module.exports.crearFlujo = async function(req, res, next){
 				input('Usuario',Usuario).query(`INSERT INTO Flujo VALUES (@NomFlujo, @CodCategoriaFlujo, @CodPaso_Inicial, @Descripcion, @Orden, @Activo, @Fecha, @Usuario)`)
 				.then(function (data) {
 					if(data.rowsAffected.length > 0 ){
-						res.status(201).json({'status':200, 'msg':'registro creado exitosamente'})
+						res.status(200).json({'status':200, 'msg':'registro creado exitosamente'})
 					}else{
 						res.status(201).json({'status':201, 'msg':'error'})
 					}
