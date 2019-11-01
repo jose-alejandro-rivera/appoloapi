@@ -3,7 +3,7 @@ var router = express.Router();
 //const connect  = require('../connect.js')
 const { departament, getUsers, getIdUsers, createUsers, getTableUsers } = require('../controllers/ControllerUser')
 const { getPrueba, tableUsers } = require('../controllers/ControllerTable')
-const { initFlujo, crearFlujo} = require('../controllers/ControllerFlujo')
+const { initFlujo, crearFlujo, listarFlujo} = require('../controllers/ControllerFlujo')
 
 // apolo
 /* GET home page. */
@@ -14,7 +14,6 @@ router.post('/users', createUsers )
 router.get('/table/users', tableUsers)
 router.get('/flujo', initFlujo )
 router.post('/flujo/crear', crearFlujo )
-
-
+router.get('/flujo/lista', listarFlujo )
 
 module.exports = router;

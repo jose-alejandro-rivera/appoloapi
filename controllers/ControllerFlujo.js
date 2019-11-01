@@ -46,7 +46,7 @@ module.exports.crearFlujo = async function(req, res, next){
 				})
 				.catch(function(err) {
 				   console.log(err);
-		   
+				   res.status(201).json({'status':201, 'msg':'Error al realizar la consulta'})
 			   });
 			}).catch(function(err) {
 			   console.log(err);
@@ -54,5 +54,29 @@ module.exports.crearFlujo = async function(req, res, next){
 		}
 	}catch(error){
 		res.status(500).json({'status':500, error : error})
+	}
+}
+
+
+module.exports.listarFlujo = async function(req, res, next){
+	try{
+		let getConnection = await connexion.getConnection();
+		let sql = await getConnection.query`SELECT Id_Flujo
+		,NomFlujo
+		,(select c.* from CategoriaFlujo as c where Id_CategoriaFlujo=CodCategoriaFlujo FOR JSON PATH) as CategoriaFlujo
+		,(select p.* from Paso as p where Id_Paso=CodPaso_Inicial FOR JSON PATH) as PasoInicial
+		,CodPaso_Inicial
+		,Descripcion
+		,Orden
+		,Activo
+		,Fecha
+		,Usuario
+	    FROM Flujo`
+		console.log(sql);
+		res.status(200).json({'status':200, 'data': sql}
+		)
+	}catch(error){
+		res.status(500).json({'status':500,'error' : error.originalError}
+		)
 	}
 }
